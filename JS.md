@@ -589,3 +589,42 @@ console.log(web); //web is not defined
 console.log(name);	// name is not defined
 ```
 
+**4. 函数提升**
+
+函数提升 ~= 变量提升（还记得吗？？），而且函数提升优先级大于变量提升，但是赋值函数不存在函数提升
+
+```javascript
+// 变量提升
+console.log(name);	// undefined
+var name = 'zs';
+
+// 函数提升
+console.log(test(2));	// 3
+function test(num) {
+    return ++num;
+}
+// 赋值函数不会提升
+var test = function (num) {
+    console.log(--num);
+};
+```
+
+> 实参，形参，默认参数，可选参数那些都挺好理解的，尤其是ES6给出的方法，真贴心
+
+**5. `arguments`是什么？**
+
+arguments是函数获得的所有参数的集合，配合ES6的展开语法
+
+```javascript
+function sum(...args) {
+    return args.reduce((a,b) => {
+        return a + b;
+    })
+}
+console.log(sum(1,2,3,4)); 	// 10
+// 小知识点，箭头函数在只有一个参数时()可以省略，只有一条return时大括号可以省略，所以第二三行可以改写
+return args.reduce((a,b)=>a+b);
+```
+
+
+
