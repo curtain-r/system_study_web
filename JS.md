@@ -415,3 +415,177 @@ for (const item of test) {
 }
 ```
 
+**4. 只能存放对象类型的`WeakSet`**
+
+`WeakSet` 结构同样不会存储重复的值，而且`它的值只能是对象类型`
+
+- 垃圾回收不考虑 `WeakSet`， 即被`WakSet` 引用是引用计数器不加一，所以对象不被引用是不管`WeakSet`是否在使用都将删除
+- 因为WeakSet是弱引用，由于其他地方操作成员可能不会存在，所以不可以进`forEach`遍历等操作
+- 因为是弱引用，WeakSet结构没有keys(),values(),entried()等方法和size属性
+- 因为是弱引用，所以当外部引用删除时，希望自动删除数据使用`WeakMap`
+
+```javascript
+const test = new WeakSet();
+const child = [1,1];
+test.add(arr);		// 添加一个数据
+test.delete(arr);	// 删除一个数据
+test.has(arr);		// false，检索判断
+```
+
+**5. `WeakSet`的垃圾回收**
+
+WeakSet保存的对象不会增加引用计数器，如果一个对象不被引用就会自动删除
+
+* 下例中的数组被引用，计数器+1
+* 数据有添加到了test的WeakSet中，引用计数还是1
+* 当数组设置为null是，引用计数-1此时对象引用为0
+* 当垃圾回收是对象被删除，这是WeakSet也就没有记录了
+
+```javascript
+const test = new WeakSet();
+let arr = ["ls"];		// 被引用，计数器+1
+test.add(arr);			// 数据添加到了test的WeakSet中，引用计数还是1
+arr = null;				// 将数组设置为null
+console.log(test);		// WeakSet { [items unknown] }
+
+setTimeout(()=>{
+    console.log(test);	// WeakSet { [items unknown] }
+})
+```
+
+### 10. 可以解决不能用对象作键的问题`Map`
+
+Map 是一组键值对的结构，用于解决以往不能用对象作为键的问题
+
+* 具有极快的查找速度
+* 函数、对象、基本类型都可以作为键或值
+
+**1. 声明定义**
+
+> 可以接受一个数组作为参数，该数组的成员是一个表示键值对的数组
+
+```javascript
+let m = new Map([
+    ['zs','张三'],
+    ['ls','李四']
+]);
+console.log(m.get('zs'));		// 张三
+```
+
+> 使用set方法添加元素，注意哦是set，之前的是add，支持链式操作
+
+```javascript
+let map = new Map();
+let obj = {
+    name: '张三'
+};
+map.set(obj,'zs').set('name','ls');			// set的链式操作添加两个元素
+console.log(map.entries())		// [Map Iterator] { [ { name: '张三' }, 'zs' ], [ 'name', 'ls' ] }
+```
+
+
+
+### 11. 深究函数
+
+> 函数就是将复用的代码封装起来
+
+**1. 声明定义**
+
+> 在JS中函数也是对象函数是`Function`类创建的实例，但是标准语法是使用函数声明来定义函数
+
+```javascript
+// 不常用的Function实例创建函数
+let fun = new Function("title","console.log(title)");
+fun('zs');	// zs
+
+// 标准语法
+function func(title) {
+    console.log(title);
+};
+func('ls');	// ls
+```
+
+> 在对象中，如果我们要书写一个函数属性的话，可以使用它的简写形式
+
+```javascript
+let user = {
+    name: 'zs',
+    getName: function (name) {
+        return this.name;
+    },
+    // 简写
+    setName(value) {
+        this.name = value;
+    }
+}
+user.setName('ls');
+console.log(user.getName());	// ls
+```
+
+我们定义的所有函数都是压入`window`对象中，也就是说全局的外层就是`window`对象，`window`中本来存在一些自己的函数，如果我们写的函数名刚好和`window`对象中的相同，那么原本window中的方法就会无法被正常调用，但是用`let/const`声明的函数不会压入`window`对象中
+
+```javascript
+function test() {
+    console.log('hhh');
+};
+window.test();	// hhh
+
+let letTest = function() {
+    console.log('let声明');
+}
+window.letTest();	// window.letTest is not a function
+```
+
+**2. 匿名函数**
+
+匿名函数就是指函数本身没有名字，只是将这个函数赋值给了一个变量
+
+```javascript
+let test = function(num) {
+    return ++num;
+};
+console.log(hd instanceof Object);	// true
+
+let newTest = test;
+console.log(newTest(3));	// 4
+```
+
+> 小知识点：如果`let newTest = test();`的话，结果就不一样了哦，不带括号相当于将整个函数赋值给新变量，如果加括号的话就相当于把函数的返回值赋值给新变量
+
+标准声明的优先级高于赋值声明
+
+```javascript
+console.log(test(3));		// 4
+// 标准声明
+function test(num) {
+	return ++num;
+}
+// 赋值声明
+var test = function(num) {
+    return --num;
+};
+```
+
+> 而且有同名的标准声明函数之后，不能够在使用`let/const`赋值式声明，只能用`var`
+
+**3. 立即执行函数(函数被定义时立即执行)**
+
+* 可以用来定义私有作用域防止污染全局作用域(前面说过了全局污染哦)
+
+```javascript
+"use strict";
+(function () {
+    var name = 'zs';
+})();
+console.log(web); //web is not defined
+```
+
+* `let/const`有块级作用域，所以只需要一对`{}`就可以将变量放在私有作用域
+
+```javascript
+{
+    let name = 'ls';
+}
+console.log(name);	// name is not defined
+```
+
