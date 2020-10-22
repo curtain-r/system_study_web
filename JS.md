@@ -347,14 +347,71 @@ console.log(obj[zsName]);		// zhangsan;
 ```javascript
 let name = Symbol('xxx');
 let obj = {
-    [name]: 'you name';		// 把名字保护起来
-    age: 18;
+    [name]: 'you name', 	// 把名字保护起来
+    age: 18
 }
 // for/in 遍历
 for (let key in obj) {
     console.log(key);	// age; 不会输出name;
 }
+// Object.getOwnPropertySymbols()获取所有Symbol属性
+for(const key of Object.getOwnPropertySymbols(obj)) {
+	console.log(key);	// Symbol(xxx)
+}
+// Reflect.ownKeys()获取所有属性
+for(const key of Reflect.ownKeys(obj)) {
+    console.log(key);	// age,Symbol(xxx);
+}
+```
 
-// 
+### 9. 非常有趣的`Set`
+
+> 用于储存任何类型的唯一值
+
+* 只能保存值没有键名
+* 严格类型检测(1 和 '1'是不同的)
+* 值是唯一的
+* 遍历顺序是添加顺序，方便保存回调函数
+
+**1. 基本用法**
+
+```javascript
+let set = new Set();	// 初始化一个字典,可以传入初始数据(数组或字符串形式)
+set.add(1);				// 添加一个内容
+set.size;				// 获取字典内容数量
+set.has(1);				// 返回true，判断是否存在检测值
+set.delete(1);			// 删除一个内容
+set.clear();			// 清空
+```
+
+**2. 转换为数组**
+
+```javascript
+let set = new Set('12345');		// Set {'1','2','3','4','5'}
+let set2Arr = [...set];			// ['1','2','3','4','5']
+```
+
+**3. 遍历数据**
+
+使用`keys()/values()/entried()`都可以返回可迭代对象，因为`Set`只有`value`，所以返回的`value,key`是一样的
+
+```javascript
+const test = new Set([1,2,3,4]);
+console.log(test.values());		// [Set Iterator] { 1, 2, 3, 4 }
+console.log(test.keys());		// [Set Iterator] { 1, 2, 3, 4 }
+console.log(test.entries());	// [Set Iterator] { 1, 2, 3, 4 }	
+```
+
+也可以使用`forEach for/of`遍历
+
+```javascript
+// forEach
+let test = new Set([1,2,3,4]);
+test.forEach((item,key)=>{console.log(item,key)});
+
+// for/of
+for (const item of test) {
+    console.log(item);
+}
 ```
 
