@@ -133,6 +133,45 @@ function sum(...args) {
 console.log(sum(1,2,3,4)); 	// 10
 
 function add(...args) {
-    return args.reduce((a,b) => a+b)
+    console.log(args);
+    // return args.reduce((a,b) => a+b);
 }
 console.log(sum(1,2,3,4)); 	// 10
+
+function arg () {
+    console.log(Array.prototype.slice.call(arguments,1));
+    console.log([...arguments].slice(1));
+    console.log([...arguments].reduce((a,b) => a+b));
+}
+arg(1,2,3,4);
+
+// 去除数组中的假值
+function bouncer(arr) {
+    // Don't show a false ID to this bouncer.
+    return arr.filter((v,i,arr) => {
+      return v != false;
+    });
+  }
+  
+  console.log(bouncer([7, "ate", "", false, 9]));
+
+  // 继承
+  function Animal() {};
+  Animal.prototype.eat = function() {
+      console.log(eat);
+  };
+  function Bird() { };
+  Bird.prototype = Object.create(Animal.prototype);// 将Animal原型作为Bird的原型
+  Bird.prototype.constructor = Bird;    // 然后把自身构造器给到自己的原型上去
+
+  // 范围内数字求和
+  function sumAll(arr) {
+    arr.sort((a,b) => a-b);
+    let res = 0;
+    for(let i=arr[0];i<=arr[1];i++) {
+      res += i;
+    };
+    return res;
+  }
+  
+  console.log(sumAll([5, 10]));
