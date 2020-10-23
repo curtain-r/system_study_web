@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        div {
+            display: block;
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        function interval(callback,delay=50) {
+            let id = setInterval(() => callback(id),delay);
+        }
+        interval(timeId => {
+            const div = document.querySelector("div");
+            console.log(div);
+            let left = parseInt(window.getComputedStyle(div).left);
+            console.log(window.getComputedStyle(div).left);
+            div.style.left = left + 10 + 'px';
+            if(parseInt(div.style.left)>window.innerWidth-200) {
+                
+            }
+        })
+    </script>
+</body>
+</html>
