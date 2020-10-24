@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        jkakdsngk@jka.c'zria'
+    </div>
+    <script>
+        let con = prompt("检索内容");
+        let reg = new RegExp(con,'g');
+        let div = document.querySelector('div');
+        div.innerHTML = div.innerHTML.replace(reg, serach => {
+            return `<span style="color: red;">${serach}</span>`;
+        });
+        let areg = /a/g;
+        let usr = 'abcda-fdad';
+        console.log(usr.match(areg))
+    </script>
+</body>
+</html>

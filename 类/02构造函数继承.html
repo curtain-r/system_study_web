@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 创建一个父类
+        function Animal(legs) {
+                this.legs = legs;
+        }
+        Animal.prototype.getLeg = function() {return this.legs};
+        // 创建一个子类，通过构造函数继承父类
+        function Dog(legs, eyes) {
+            Animal.call(this,legs);	// 将Animal这个构造函数绑定在Dog中实现继承
+            this.eyes = eyes;
+        };
+        console.log(Animal);
+        // 创建一个子类实例
+        let dog = new Dog(4,2);
+        let animal = new Animal(3);
+        console.log(animal.getLeg());		
+        console.log(dog.legs);
+    </script>
+</body>
+</html>
