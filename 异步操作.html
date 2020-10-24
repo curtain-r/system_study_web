@@ -26,14 +26,13 @@
         }
         interval(timeId => {
             const div = document.querySelector("div");
-            console.log(div);
             let left = parseInt(window.getComputedStyle(div).left);
-            console.log(window.getComputedStyle(div).left);
             div.style.left = left + 10 + 'px';
             if(parseInt(div.style.left)>window.innerWidth-200) {
                 
             }
         })
     </script>
+    <script src="./类/06ES6类的定义.js"></script>
 </body>
 </html>

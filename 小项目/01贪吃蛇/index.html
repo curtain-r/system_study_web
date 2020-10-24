@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贪吃蛇</title>
+    <style>
+        .box {
+            margin: 100px auto;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .row {
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            display: flex;
+        }
+        .col {
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <script src="./js/Block.js"></script>
+    <script src="./js/Game.js"></script>
+    <script src="./js/Food.js"></script>
+    <script src="./js/Map.js"></script>
+    <script src="./js/Snake.js"></script>
+    <script>
+        let block = new Block();
+        let map = new Map(10,10,300,300);
+        let food = new Food();
+        let snake = new Snake();
+        let game = new Game(snake,map,food,block);
+    </script>
+</body>
+</html>

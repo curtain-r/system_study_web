@@ -39,3 +39,15 @@ let b2 = new Book('面试题', 60);
 console.log(b1, b2);
 console.log(b1._num)
 console.log(Book.write)
+// JsBook 继承于 Book
+class JsBook extends Book{
+    // 可以重写构造函数
+    constructor(title, price, score) {
+        // 继承父类的部分
+        super(title, price);
+        // 自己拥有 的部分
+        this.score =  score;
+    }
+}
+let jb = new JsBook('js', 60, 100);
+console.log(jb);
