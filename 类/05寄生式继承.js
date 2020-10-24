@@ -8,7 +8,7 @@ function inherit(child, parent) {
     // 2. 让寄生类的原型等于父类的原型
     F.prototype = parent.prototype;
     // 3. 将寄生类 的实例赋值给子类原型
-    child.prototyp = new F();
+    child.prototype = new F();
     return child;
 };
 function People (name,age) {
@@ -19,10 +19,12 @@ People.prototype.getName = function() {
     console.log(`我的名字是${this.name}`);
 };
 function Kid(name,age,sex) {
-    People.call(this,name,age);
+    this.name = name;
+    this.age = age;
     this.sex = sex;
 };
 inherit(Kid,People);	// 寄生式继承
-console.log(Kid);
+
 let kid = new Kid('小白',10,'男');
+
 kid.getName();
