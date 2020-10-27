@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin: 50px auto;
+            height: 20px;
+            background-color:green;
+            width: 0;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <button>开始</button>
+    <script>
+        let i = 0;
+        document.querySelector('button').addEventListener('click',function() {
+            
+            while(i<100) {
+                setTimeout(function(){
+                    div.style.width = i * 30 + 'px';
+                    i++;
+                    console.log(i);
+                },100)
+            }
+        })
+    </script>
+</body>
+</html>
