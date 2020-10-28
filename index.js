@@ -113,65 +113,145 @@
 // // console.log(name);	// name is not defined
 
 // 变量提升
-console.log(name);	// undefined
-var name = 'zs';
+// console.log(name);	// undefined
+// var name = 'zs';
 
-// 函数提升
-console.log(test(2));	// 3
-function test(num) {
-    return ++num;
-}
-// 赋值函数不会提升
-var test = function (num) {
-    console.log(--num);
-};
-function sum(...args) {
-    return args.reduce((a,b) => {
-        return a + b;
-    })
-}
-console.log(sum(1,2,3,4)); 	// 10
+// // 函数提升
+// console.log(test(2));	// 3
+// function test(num) {
+//     return ++num;
+// }
+// // 赋值函数不会提升
+// var test = function (num) {
+//     console.log(--num);
+// };
+// function sum(...args) {
+//     return args.reduce((a,b) => {
+//         return a + b;
+//     })
+// }
+// console.log(sum(1,2,3,4)); 	// 10
 
-function add(...args) {
-    console.log(args);
-    // return args.reduce((a,b) => a+b);
-}
-console.log(sum(1,2,3,4)); 	// 10
+// function add(...args) {
+//     console.log(args);
+//     // return args.reduce((a,b) => a+b);
+// }
+// console.log(sum(1,2,3,4)); 	// 10
 
-function arg () {
-    console.log(Array.prototype.slice.call(arguments,1));
-    console.log([...arguments].slice(1));
-    console.log([...arguments].reduce((a,b) => a+b));
-}
-arg(1,2,3,4);
+// function arg () {
+//     console.log(Array.prototype.slice.call(arguments,1));
+//     console.log([...arguments].slice(1));
+//     console.log([...arguments].reduce((a,b) => a+b));
+// }
+// arg(1,2,3,4);
 
-// 去除数组中的假值
-function bouncer(arr) {
-    // Don't show a false ID to this bouncer.
-    return arr.filter((v,i,arr) => {
-      return v != false;
-    });
+// // 去除数组中的假值
+// function bouncer(arr) {
+//     // Don't show a false ID to this bouncer.
+//     return arr.filter((v,i,arr) => {
+//       return v != false;
+//     });
+//   }
+  
+//   console.log(bouncer([7, "ate", "", false, 9]));
+
+//   // 继承
+//   function Animal() {};
+//   Animal.prototype.eat = function() {
+//       console.log(eat);
+//   };
+//   function Bird() { };
+//   Bird.prototype = Object.create(Animal.prototype);// 将Animal原型作为Bird的原型
+//   Bird.prototype.constructor = Bird;    // 然后把自身构造器给到自己的原型上去
+
+//   // 范围内数字求和
+//   function sumAll(arr) {
+//     arr.sort((a,b) => a-b);
+//     let res = 0;
+//     for(let i=arr[0];i<=arr[1];i++) {
+//       res += i;
+//     };
+//     return res;
+//   }
+  
+//   console.log(sumAll([5, 10]));
+
+// IIFE
+// let demo1 = function() {
+//     console.log('aaa');
+// }();
+// (function demo2() {
+//     console.log('bbb');
+// })();
+// let arr = [];
+// for (var i=0;i<5;i++) {
+//     arr[i] = (function(i){
+//         return function() {
+//             console.log(i);
+//         };
+//     })(i);
+// }
+// arr[3]();
+
+// function add(a,b,c) {
+//     if(arguments.length==1) return a+10;
+//     else if(arguments.length==2) return a+b;
+//     else return -1;
+// }
+// console.log(add(5));
+// console.log(add(5,6));
+
+// // 优先队列
+// function PriorityQueue () {
+//     this.collection = [];
+//     this.printCollection = function() {
+//       console.log(this.collection);
+//     };
+//     // 请把你的代码写在这条注释以下
+//     this.enqueue = function(arr) {
+//         if (this.collection.length == 0) this.collection.push(arr);
+//         else if (arr[1]<this.collection[0][1]) {
+//             this.collection.unshift(arr);
+//         } else if (arr[1]>this.collection[this.collection.length-1][1]) {
+//             this.collection.push(arr);
+//         } else {
+//             for (let i=1;i<this.collection.length;i++) {
+//                 if(arr[1]<this.collection[i][1]) {
+//                     this.collection.splice(i,0,arr);
+//                     break;
+//                 }
+//             }
+//         }
+//     } 
+//     // 请把你的代码写在这条注释以上
+// }
+// a = new PriorityQueue();
+// a.enqueue(['a',1]);
+// a.enqueue(['b',3]);
+// a.enqueue(['c',2]);
+// a.printCollection();
+
+// 3或5的倍数和
+function multiplesOf3and5(number) {
+    // 祝你好运！
+    let start3 = 3;
+    let end3 = number - ((number-1)%3) -1;
+    let start5 =5;
+    let end5 = number - ((number-1)%5) -1;
+    let no = 15;
+    let noend = number - ((number-1)%15) -1;
+  
+    return ((start3+end3)*(end3/start3) -(no+noend)*(noend/no)+ (start5+end5)*(end5/start5))/2;
   }
   
-  console.log(bouncer([7, "ate", "", false, 9]));
+  console.log(multiplesOf3and5(49));
 
-  // 继承
-  function Animal() {};
-  Animal.prototype.eat = function() {
-      console.log(eat);
-  };
-  function Bird() { };
-  Bird.prototype = Object.create(Animal.prototype);// 将Animal原型作为Bird的原型
-  Bird.prototype.constructor = Bird;    // 然后把自身构造器给到自己的原型上去
-
-  // 范围内数字求和
-  function sumAll(arr) {
-    arr.sort((a,b) => a-b);
+  // 偶斐波那契数
+  function fiboevenSum(number) {
+    let a = 1;
+    let b = 2;
     let res = 0;
-    for(let i=arr[0];i<=arr[1];i++) {
-      res += i;
-    };
-    return res;
+    for (let i=;i<number;i++) {
+
+    }
   }
-  
-  console.log(sumAll([5, 10]));
