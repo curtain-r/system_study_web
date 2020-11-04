@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 创建动物
+        function Dog(name, type) {
+            this.type = type;
+            this.name = name;
+        }
+        function Cat(name, type) {
+            this.type = type;
+            this.name = name;
+        }
+        function Pig(name, type) {
+            this.type = type;
+            this.name = name;
+        }
+        // 实例
+        // let dog = new Dog('老大');
+        // let pig = new Pig('老二');
+        // let cat = new Cat('老三');
+
+        // 通过工厂方法创建
+        function animal(name, type) {
+            if (type == 'dog') {
+                return new Dog(name);
+            } else if (type == 'cat') {
+                return new Cat(name);
+            } else {
+                return new Pig(name);
+            }
+        }
+
+        // 创建实例
+        let dog = animal('老大', 'dog');
+        let cat = animal('老二', 'cat');
+        let pig = animal('老三', 'pig');
+        console.log(dog,cat,pig)
+        
+    </script>
+</body>
+</html>

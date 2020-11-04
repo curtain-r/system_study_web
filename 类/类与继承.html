@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Book(title) {
+            // 实例属性
+            this.title = title;
+        }
+        // 原型属性
+        Book.prototype.getTitle = function () {
+            console.log(this.title);
+        }
+        // 静态属性
+        Book.write = function() {
+            console.log('静态属性');
+        }
+        function JsBook(title, price) {
+            Book.call(this,title);
+            this.price = price;
+        }
+        // 寄生式继承
+        function inherit(Child, Parent) {
+            // 寄生类
+            function F() {
+                // 修改constructor指向
+                this.constructor = Child;
+            }
+            // 修改原型
+            F.prototype = Parent.prototype;
+            // 修改子类原型
+            Child.prototype = new F();
+            // 继承静态方法
+            for (let key in Parent) {
+                if (Parent.hasOwnProperty(key)) {
+                    Child[key] = Parent[key];
+                }
+            }
+        }
+        // 继承实现
+        inherit(JsBook, Book);
+        // 给子类添加原型方法
+        JsBook.getPrice = function () {
+            console.log("JsBook:price",this.price);
+        }
+        // 给子类添加静态方法
+        JsBook.getWrite = function() {
+            console.log(this.write);
+        }
+
+        // 实例化
+        let b1 = new JsBook('javascript设计模式', 59);
+        console.log(b1);
+        b1.getTitle();
+        Book.write();
+        JsBook.write();
+        console.log(JsBook.prototype.constructor == JsBook)     // true
+    </script>
+</body>
+</html>

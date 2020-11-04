@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 闭包
+        function outer() {
+            let a = 10;
+            return function inner() {
+                console.log(a++);
+            }
+        }
+        let f = outer();        // f = function inner() {console.log(a++);};
+        f();
+        f();
+        f();
+        // 函数执行完毕后，变量不在使用，就被销毁了，但是闭包的变量不会被销毁，因为它的变量一直要被引用
+
+        // IIFE 处理闭包
+        let fn1 = (function() {
+            let a =10;
+            return function() {
+                console.log(a++);
+            }
+        })();
+        fn1();
+        fn1();
+
+        // 通过IIFE和闭包保护类
+        let People = (function() {
+            function People(name) {
+                this.name = name;
+            };
+            return People;
+        })();
+
+        let p1 = new People();
+        console.log(p1)
+    </script>
+</body>
+</html>

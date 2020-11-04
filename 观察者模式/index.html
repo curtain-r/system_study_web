@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 观察者模式，发布订阅者模式，消息系统，消息机制，自定义事件
+        let Observer = (function() {
+            // 消息对象
+            let _msg = {};
+            return {
+                // 订阅
+                on: function(type, fn) {
+                    if(_msg[type]) {
+                        _msg[type].push(fn);
+                    } else {
+                        _msg[type] = [fn];
+                    }
+                    console.log('订阅成功');
+                },
+                // 发布
+                trigger: function() {},
+                // 撤销
+                off: function() {},
+                // 单次订阅
+                once: function() {}
+            }
+        })();
+
+        // 订阅
+        Observer.on('s', function() {
+            console.log(arguments);
+        })
+        Observer.on('s', function() {
+            console.log(arguments);
+        })
+        Observer.on('s', function() {
+            console.log(arguments);
+        })
+        
+    </script>
+</body>
+</html>

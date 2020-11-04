@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 定义变量
+        let name = '小白';
+        let age = 20;
+        let sex = 'man';
+        // 放在对象中
+        function factory(name, age, sex) {
+            let obj = {
+                name: name,
+                age: age,
+                sex:sex,
+                intro: function() {
+                    console.log(`我是${name},性别${sex},年龄${age}`);
+                }
+            }
+            return obj;
+    }
+        // 为了创建一个对象定义了很多变量，污染全局作用域
+        // 使用工厂模式简化对象的创建，避免污染全局作用域
+        let obj1 = factory('小白', 20, 'man');
+        let obj2 = factory('小红',20,'girl');
+        console.log(obj1);
+        console.log(obj2);
+
+    </script>
+</body>
+</html>

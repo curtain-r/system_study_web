@@ -251,7 +251,7 @@ function multiplesOf3and5(number) {
     let a = 1;
     let b = 2;
     let res = 0;
-    for (let i=;i<number;i++) {
-
+    for (let i=0;i<number;i++) {
+      
     }
   }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 通过类来创建对象
+        function People(name, age, sex) {
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+        }
+        // 方法
+        People.prototype.intro = function() {
+            console.log('xxx');
+        }
+        // 创建实例
+        let p1 = new People('小红', 20, 'man');
+        let p2 = new People('xiaobai',20, 'girl');
+        let p3 = new People('xiaojj', 20, 'girle');
+        // 增强工厂
+        function factory (name, age, sex) {
+            let p = new People(name,age,sex);
+            // 增强
+            if(p.sex == "girl") {
+                p.msg = 'hello';
+                p.say = function() {
+                    console.log(this.msg);
+                }
+            }
+            return p;
+        }
+        let f1 = factory('小红', 20, 'girl');
+        let f2 = factory('l',20,'man');
+        console.log(f1,f2);
+    </script>
+</body>
+</html>

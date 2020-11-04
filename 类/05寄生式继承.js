@@ -7,6 +7,12 @@ function inherit(child, parent) {
     };
     // 2. 让寄生类的原型等于父类的原型
     F.prototype = parent.prototype;
+    // 继承静态属性
+    for (let key in parent) {
+        if (parent.hasOwnProperty(key)) {
+            child[key] = parent[key];
+        }
+    }
     // 3. 将寄生类 的实例赋值给子类原型
     child.prototype = new F();
     return child;

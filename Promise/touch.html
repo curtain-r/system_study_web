@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id='div' style="height: 100px;width: 100px;background-color:red"></div>
+    <script>
+        let div = document.getElementById('div');
+        let date = Date.now();
+        div.onclick = function() {
+            console.log("click",Date.now() - date);
+            
+        }
+        div.ontouchstart = function() {
+            console.log("touch start");
+        }
+        div.ontouchend = function(e) {
+            console.log("touch end",e);
+        }
+    </script>
+</body>
+</html>

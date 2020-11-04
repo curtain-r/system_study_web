@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 只实例化一次
+        let Single = (function() {
+            function Demo() {
+                console.log('实例化了');
+                // 超级多数据
+            }
+            Demo.prototype.xx = 2;
+            // 很多原型方法
+            let lazy;
+            return function() {
+                if(lazy) {
+                    return lazy;
+                } else {
+                    return lazy = new Demo;
+                }
+            }
+        })();
+        // 创建多个实例，看他是否只实例一次
+        let a = Single();
+        let b = Single();
+        console.log(a,b);
+    </script>
+</body>
+</html>
